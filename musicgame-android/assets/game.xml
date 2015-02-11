@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game
+    id="MusicGame"
+    class="com.turpgames.musicgame.view.MusicGameGame"
+    version="1.0.0" >
+
+    <params>
+
+        <param
+            key="debug"
+            value="true" />
+
+        <param
+            key="server"
+            value="test" />
+
+        <param
+            key="enable-ads"
+            value="false" />
+
+        <param
+            key="enable-analytics"
+            value="false" />
+
+        <param
+            key="provider"
+            value="com.turpgames.framework.v0.impl.libgdx.GdxGameProvider" />
+
+        <param
+            key="settings-key"
+            value="com.turpgames.musicgame" />
+
+        <param
+            key="virtual-width"
+            value="800" />
+
+        <param
+            key="virtual-height"
+            value="450" />
+
+        <param
+            key="default-font"
+            value="Akachen,1" />
+
+        <param
+            key="disable-vibration"
+            value="true" />
+
+        <param
+            key="default-screen"
+            value="splash" />
+
+        <param
+            key="default-skin"
+            value="musicgame" />
+
+        <param
+            key="screen-switcher"
+            value="sliding,0.30" />
+
+        <param
+            key="form-switcher"
+            value="sliding,0.30" />
+
+        <param
+            key="allow-exit-on-back"
+            value="true" />
+
+        <param
+            key="fb-share-title"
+            value="Music Game" />
+
+        <param
+            key="fb-share-subtitle"
+            value="Turp Games" />
+
+        <param
+            key="fb-share-href"
+            value="http://www.turpgames.com/musicgameredirect.html" />
+
+        <param
+            key="fb-share-imgurl"
+            value="http://www.turpgames.com/img/musicgame.png" />
+
+        <param
+            key="fb-share-appinfo"
+            value="Play fun games with Turp Games!" />
+
+        <param
+            key="prod-server"
+            value="http://prod.turpgam.es/" />
+
+        <param
+            key="test-server"
+            value="http://test.turpgam.es/" />
+
+        <param
+            key="local-server"
+            value="http://192.168.2.4:8080/turp-server/" />
+
+        <param
+            key="turp-address"
+            value="http://www.turpgames.com" />
+
+        <param
+            key="play-store-address"
+            value="market://details?id=com.turpgames.musicgame" />
+
+        <param
+            key="app-store-address-ios7"
+            value="itms-apps://itunes.apple.com/app/id{app-store-id}" />
+
+        <param
+            key="app-store-address-old"
+            value="itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&amp;id={app-store-id}" />
+
+        <param
+            key="twitter-address"
+            value="http://www.twitter.com/turpgames" />
+
+        <param
+            key="facebook-address"
+            value="http://www.facebook.com/turpgames" />
+
+        <param
+            key="admob-interstitial-ad-unit-id"
+            value="ca-app-pub-9430411208134016/{admob-ad-unit-id}" />
+    </params>
+
+    <screens>
+
+        <screen
+            id="splash"
+            class="com.turpgames.musicgame.view.SplashScreen" />
+
+        <screen
+            id="auth"
+            class="com.turpgames.musicgame.view.AuthScreen" />
+
+        <screen
+            id="menu"
+            class="com.turpgames.musicgame.view.MenuScreen" />
+
+        <screen
+            id="game"
+            class="com.turpgames.musicgame.view.GameScreen" />
+
+        <screen
+            id="about"
+            class="com.turpgames.musicgame.view.AboutScreen" />
+    </screens>
+
+    <forms>
+
+        <form id="mainMenu" >
+
+            <button
+                id="btnPlay"
+                action="screen=game"
+                text="Play"
+                y="8" />
+
+            <button
+                id="btnAbout"
+                action="screen=about"
+                resource-text="About"
+                y="5" />
+        </form>
+    </forms>
+
+    <animations>
+
+        <animation
+            id="loading"
+            frame-duration="0.040"
+            frame-height="74"
+            frame-width="74"
+            loop="true"
+            texture="loading" />
+    </animations>
+
+    <resources>
+
+        <fonts>
+
+            <font
+                id="Akachen"
+                path="fonts/akachen_1024.fnt" />
+        </fonts>
+
+        <textures>
+
+            <texture
+                id="turp_logo"
+                path="img/turpgames_logo.png"
+                resource-load="primary" />
+
+            <texture
+                id="loading"
+                path="img/loading.png" />
+
+            <texture
+                id="facebook"
+                path="img/facebook.png" />
+
+            <texture
+                id="fw_close"
+                path="img/framework/close.png" />
+
+            <texture
+                id="tb_back"
+                path="img/toolbar/back.png" />
+
+            <texture
+                id="tb_sound_off"
+                path="img/toolbar/sound-off.png" />
+
+            <texture
+                id="tb_sound_on"
+                path="img/toolbar/sound-on.png" />
+        </textures>
+
+        <sounds>
+
+            <sound
+                id="btn"
+                path="audio/btn.mp3" />
+        </sounds>
+
+        <musics>
+
+            <music
+                id="test"
+                resource-load="ondemand"
+                path="music/test.mp3" />
+        </musics>
+    </resources>
+
+    <languages>
+
+        <language
+            id="en-US"
+            encoding="UTF8"
+            flag-texture-id="flag_en_us"
+            path="lang/Strings_en_US.properties" />
+    </languages>
+
+    <skins>
+
+        <skin id="musicgame" >
+
+            <form
+                cols="32"
+                rows="16" />
+
+            <button
+                cols="8"
+                default-color="#ffffffff"
+                focus-color="#f9b000ff"
+                font-scale="1"
+                halign="center"
+                rows="2"
+                sound-click="btn"
+                vibrate="0"
+                x="12" />
+
+            <label
+                halign="center"
+                rows="2"
+                color="#fff" />
+        </skin>
+    </skins>
+
+</game>
