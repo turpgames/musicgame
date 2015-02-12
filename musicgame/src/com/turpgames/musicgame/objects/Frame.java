@@ -55,13 +55,15 @@ public class Frame implements IDrawable {
 	}
 
 	private class FrameObj extends GameObject {
-		private final Color selectedColor = Color.red();
+		private final Color draggingColor = Color.red();
+		private final Color canDragColor = Color.fromHex("#ff0");
 		private final Color defaultColor = Color.fromHex("#0080ff");
 
 		private Signal signal;
 		private float dragDx;
 		private float dragDy;
 		private boolean canDrag;
+		private boolean isDragging;
 
 		FrameObj(float[] data) {
 			this.signal = new Signal();
@@ -85,47 +87,71 @@ public class Frame implements IDrawable {
 		void setProgress(float progress) {
 			signal.setProgress(progress);
 		}
-
 		@Override
-		protected boolean onTap() {
-			play();
-			return super.onTap();
+		protected boolean onTouchDown(float x, float y) {
+			canDrag = true;
+			getColor().set(canDragColor);
+
+			x = Game.screenToViewportX(x);
+			y = Game.screenToViewportY(y);
+			
+			Vector loc = getLocation();
+			
+			dragDx = loc.x - x;
+			dragDy = loc.y - y;
+			
+			return super.onTouchDown(x, y);
 		}
-
+		
 		@Override
-		public boolean touchDragged(float x, float y, int pointer) {
+		protected boolean onTouchDragged(float x, float y) {
 			if (!canDrag) {
 				return false;
 			}
-			x = Game.screenToViewportX(x);
-			y = Game.screenToViewportY(y);
-			setPosition(x + dragDx, y + dragDy);
+			
+			isDragging = true;
+			getColor().set(draggingColor);
+			
 			return true;
 		}
 
 		@Override
-		protected boolean onTouchUp(float x, float y) {
-			if (canDrag) {
-				canDrag = false;
-			}
-			getColor().set(defaultColor);
-			return super.onTouchUp(x, y);
-		}
-		
-		@Override
-		protected boolean onLongPress(float x, float y) {
-			if (canDrag) {
-				return false;
+		public boolean touchDragged(float x, float y, int pointer) {
+			if (!isDragging) {
+				return super.touchDragged(x, y, pointer);
 			}
 			x = Game.screenToViewportX(x);
 			y = Game.screenToViewportY(y);
-			canDrag = true;
-			getColor().set(selectedColor);
-			Vector loc = getLocation();
-			dragDx = loc.x - x;
-			dragDy = loc.y - y;
-			return super.onLongPress(x, y);
+			setPosition(x + dragDx, y + dragDy);
+			return false;
 		}
+
+		@Override
+		protected boolean onTouchUp(float x, float y) {
+			if (isDragging) {
+				isDragging = false;
+			} else {
+				play();
+			}
+			canDrag = false;
+			getColor().set(defaultColor);
+			return true;
+		}
+
+//		@Override
+//		protected boolean onLongPress(float x, float y) {
+//			if (canDrag) {
+//				return false;
+//			}
+//			x = Game.screenToViewportX(x);
+//			y = Game.screenToViewportY(y);
+//			canDrag = true;
+//			getColor().set(selectedColor);
+//			Vector loc = getLocation();
+//			dragDx = loc.x - x;
+//			dragDy = loc.y - y;
+//			return super.onLongPress(x, y);
+//		}
 
 		@Override
 		public void draw() {
